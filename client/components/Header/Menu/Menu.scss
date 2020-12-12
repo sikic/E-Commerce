@@ -1,0 +1,42 @@
+.menu {
+  background-color: $background-grey-dark;
+  border-radius: 0 !important;
+
+  .ui.grid {
+    margin: 0;
+  }
+
+  &__left,
+  &__right {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    .ui.menu {
+      border-radius: 0 !important;
+      box-shadow: none;
+      height: 100%;
+      background-color: transparent !important;
+    }
+    .icon {
+      margin-right: 10px !important;
+      color: $primary;
+    }
+    .ui.menu a {
+      font-weight: bold;
+
+      &:hover {
+        color: white !important;
+        background-color: rgb(43, 40, 40) !important;
+      }
+
+      &.m-0 i {
+        margin: 0 !important;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
