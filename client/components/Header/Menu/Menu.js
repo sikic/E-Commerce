@@ -6,10 +6,18 @@ import {
   Label,
   GridColumn,
 } from "semantic-ui-react";
-
+import { useState } from "react";
 import Link from "next/link";
+import BasicModal from "../Modal/BasicModal";
+import Auth from "../../Auth";
 
 const MenuWeb = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [onCloseModal, setOnCloseModal] = useState(false);
+  const [title, setTitle] = useState("Iniciar Sesión");
+
+  const onShowModal = () => setShowModal(true);
+
   return (
     <div className="menu">
       <Container>
@@ -19,10 +27,18 @@ const MenuWeb = () => {
           </GridColumn>
 
           <GridColumn className="menu__right" width={10}>
-            <MenuOption />
+            <MenuOption onShowModal={onShowModal} />
           </GridColumn>
         </Grid>
       </Container>
+      <BasicModal
+        show={showModal}
+        setShow={setShowModal}
+        title={title}
+        size="small"
+      >
+        <Auth onCloseModal={onCloseModal} setTitle={setTitle} />
+      </BasicModal>
     </div>
   );
 };
@@ -45,10 +61,11 @@ function MenuPlatform() {
   );
 }
 
-function MenuOption() {
+function MenuOption(props) {
+  const { onShowModal } = props;
   return (
     <Menu>
-      <Menu.Item as="a" id="mi-cuenta">
+      <Menu.Item as="a" id="mi-cuenta" onClick={onShowModal}>
         <Icon name="user outline" />
         Mi cuenta
       </Menu.Item>
