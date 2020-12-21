@@ -63,7 +63,7 @@ const RegisterForm = (props) => {
         error={formik.errors.password}
       />
       <div className="actions">
-        <Button type="button" basic>
+        <Button type="button" basic onClick={showLogin}>
           Iniciar sesión
         </Button>
         <Button type="submit" className="submit" loading={loading}>
