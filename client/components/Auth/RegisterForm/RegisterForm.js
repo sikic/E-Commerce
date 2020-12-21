@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { registerApp } from "../../../api/user";
 
 const RegisterForm = (props) => {
   const { showLogin } = props;
@@ -10,11 +11,11 @@ const RegisterForm = (props) => {
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: (formData) => {
-      console.log(formData);
+      registerApp(formData);
     },
   });
   return (
-    <Form className="login-form" onSubmit={() => formik.handleSubmit}>
+    <Form className="login-form" onSubmit={formik.handleSubmit}>
       <Form.Input
         name="name"
         type="text"
