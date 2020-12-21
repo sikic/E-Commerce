@@ -2,16 +2,27 @@ import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 import { registerApp } from "../../../api/user";
 
 const RegisterForm = (props) => {
   const { showLogin } = props;
+  const [loading, setloading] = useState(false);
 
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
-    onSubmit: (formData) => {
-      registerApp(formData);
+    onSubmit: async (formData) => {
+      setloading(true);
+      const responseApi = await registerApp(formData);
+      if (responseApi?.jwt) {
+        toast.success("Usuario creado correctamente");
+        showLogin();
+      } else {
+        toast.error("Error al registrar el usuario");
+      }
+
+      setloading(false);
     },
   });
   return (
@@ -55,7 +66,7 @@ const RegisterForm = (props) => {
         <Button type="button" basic>
           Iniciar sesión
         </Button>
-        <Button type="submit" className="submit">
+        <Button type="submit" className="submit" loading={loading}>
           Registrar
         </Button>
       </div>
