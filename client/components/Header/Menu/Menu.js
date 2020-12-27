@@ -13,10 +13,11 @@ import Auth from "../../Auth";
 
 const MenuWeb = () => {
   const [showModal, setShowModal] = useState(false);
-  const [onCloseModal, setOnCloseModal] = useState(false);
+
   const [title, setTitle] = useState("Iniciar Sesión");
 
   const onShowModal = () => setShowModal(true);
+  const onCloseModal = () => setShowModal(false);
 
   return (
     <div className="menu">
