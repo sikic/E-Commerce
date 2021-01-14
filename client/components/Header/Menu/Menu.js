@@ -10,10 +10,11 @@ import { useState } from "react";
 import Link from "next/link";
 import BasicModal from "../Modal/BasicModal";
 import Auth from "../../Auth";
+import useAuth from "../../../hooks/useAuth";
 
 const MenuWeb = () => {
   const [showModal, setShowModal] = useState(false);
-
+  const { logOut, auth } = useAuth();
   const [title, setTitle] = useState("Iniciar Sesión");
 
   const onShowModal = () => setShowModal(true);
@@ -28,7 +29,11 @@ const MenuWeb = () => {
           </GridColumn>
 
           <GridColumn className="menu__right" width={10}>
-            <MenuOption onShowModal={onShowModal} />
+            {auth ? (
+              <button onClick={logOut}>Cerrar sesion</button>
+            ) : (
+              <MenuOption onShowModal={onShowModal} />
+            )}
           </GridColumn>
         </Grid>
       </Container>
